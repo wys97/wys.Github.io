@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		.box{
+			position: relative;
+			width: 600px;
+			height: 300px;
+			margin: 100px auto;
+			overflow: hidden;
+		}
+		#list{
+			position: relative;
+			width: 4200px;
+		}
+		#list img{
+			width: 600px;
+			height: 300px;
+			float: left;
+		}
+		a{	
+			display: block;
+			width: 40px;
+			height: 40px;
+			background: rgba(0,0,0,0.5);
+			color: #fff;
+			font-size:28px;
+			text-align: center;
+			line-height: 36px;
+			font-weight: bold;
+			position: absolute;
+			top: 50%;
+			margin-top:-20px;
+			border-radius: 50%;
+			
+			z-index: 15;
+		}
+		#btn-l{
+			margin-left: 20px;
+		}
+		#btn-r{
+			right: 0;
+			margin-right: 20px;
+		}
+	</style>
+	<body>
+		<div class="box">
+			<div id="list" style="left:-600px;">
+				<img src="../img/5.jpg" title="5"/>
+				<img src="../img/1.jpg" title="1"/>
+				<img src="../img/2.jpg" title="2"/>
+				<img src="../img/3.jpg" title="3"/>
+				<img src="../img/4.jpg" title="4"/>
+				<img src="../img/5.jpg" title="5"/>
+				<img src="../img/1.jpg" title="1"/>
+			</div>
+			<a id="btn-l"><</a>
+			<a id="btn-r">></a>
+		</div>
+		
+		<script type="text/javascript">
+			window.onload = function(){
+				
+				var list = document.querySelector("#list");
+				var btnL = document.querySelector("#btn-l");
+				var btnR = document.querySelector("#btn-r");
+				var len = 5;
+				var gg = false;
+				var timer = null;
+				var timout = null;
+				
+				
+				function gun(ss){
+					
+					if(ss == 0){
+						return;
+					}					
+					gg = true;
+					
+				var aa = parseInt(list.style.left) + ss; 
+					console.log(aa)
+					
+				function go(){
+					
+					if(parseInt(list.style.list) > aa){
+						
+						list.style.left = parseInt(list.style.list) + "px";
+						
+						
+					}else{
+						
+						list.style.left = aa + "px";
+						
+						if(aa > -600){
+							
+							list.style.left = -600 * len + "px";
+						}
+						
+						if(aa < (-600*len)){
+							
+							list.style.left = "-600px";
+							
+						}
+						
+						gg = false;
+					}
+					
+				}
+					go();		 	
+				
+			}
+				btnL.onclick = function(){
+					
+					if(!gg){
+						
+						gun(600);
+					}
+				}
+				
+				btnR.onclick = function(){
+					if(!gg){
+						
+						gun(-600);
+					}
+					
+				}
+				function zou(){
+					timer = setInterval(function(){
+						
+						btnR.onclick();
+						
+					},2000)
+				}
+				
+				function ting(){
+					
+					clearInterval(timer);
+					
+				}
+				
+				document.querySelector(".box").onmouseover = ting;
+				document.querySelector(".box").onmouseout = zou;
+				zou();
+				
+}
+		</script>
+	</body>
+</html>
